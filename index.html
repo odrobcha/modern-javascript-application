@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather forecast </title>
+    <link rel="stylesheet" href="styles/normalize.css">
+
+
+</head>
+<body>
+<div class="container">
+    <select id="countries">
+        <option value="null">Chose the country</option>
+    </select>
+    <p id="countries-info"></p>
+
+    <select id="cities">
+        <option value="null">Chose the city</option>
+    </select>
+    <p id="cities-info"></p>
+
+    <button id="showWeather">
+        Show Weather Forecast
+    </button>
+
+
+</div>
+
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="scripts/getCountryList.js"></script>
+
+<script src="scripts/script.js"></script>
+</html>

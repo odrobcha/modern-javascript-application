@@ -1,2 +1,2 @@
-import main from './getCountryList';
+import main from './script';
 

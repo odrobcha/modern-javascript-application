@@ -9,14 +9,13 @@ const myWeatherChart = (temp, days, beginYAt)=>{
                 label: 'Weather Forecast',
                 data: temp,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgba(87, 21, 93, 1)',
 
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-
+                    'rgba(87, 21, 93, 1)'
                 ],
-                borderWidth: 5
+                borderWidth: 4
             }]
         },
         options: {

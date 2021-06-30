@@ -1,3 +1,5 @@
+
+
 body {
   background: url(../img/purple3.jpg) no-repeat;
   /* Keep the inherited background full size. */
@@ -8,15 +10,14 @@ body {
   justify-content: center;
   min-height: 100vh;
   background-position:center center;
+  color: var(--font-color);
+  text-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.2);
 
 }
-
 @mixin blurEffectContainer{
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
-
   position: relative;
   z-index: 1;
-
   overflow: hidden;
 }
 
@@ -35,36 +36,189 @@ body {
 }
 
 .container {
-  width: 80vw;
+  width: 700px;
   height: auto;
-  padding: 40px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  justify-items: center;
   background: inherit;
   @include blurEffectContainer;
   border-radius: 20px;
-
+  margin-top: 70px;
+  margin-bottom: 70px;
+  animation: startAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes startAnimation {
+  from{opacity: 0}
+  to {opacity: 1}
 
 }
 
 .container:before {
   @include blurEffectContainerBefore;
 }
+.container-inner{
+  padding: 70px;
+}
 select, button{
   height: 2.5rem;
+  animation: startAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+
+select, button, .card{
+
   background: rgba(255, 255, 255, 0.6);
   border: none;
   border-radius: 10px;
   @include blurEffectContainer
 
 }
-button{
-  background: rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-}
-select::before, button::before{
- @include blurEffectContainerBefore;
 
+.card{
+  animation: startAnimation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+
+
+select::before, button::before, card::before{
+ @include blurEffectContainerBefore;
+}
+
+button{
+  background: var(--main-purple);
+  cursor: pointer;
+
+}
+
+.weather-container {
+  display: grid;
+  grid-template-columns:100%;
+  grid-template-rows: 50%;
+  grid-auto-flow: row;
+  grid-row-gap: 20px;
+}
+
+.weather-controls{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto;
+
+}
+.weather-buttons{
+  display: grid;
+  grid-template-columns: 200px 200px 160px;
+  grid-template-rows: 100%;
+  grid-gap: 20px;
+  grid-auto-flow: row;
+
+}
+
+#today-weather{
+  display: grid;
+  grid-template-columns: 150px auto;
+  grid-template-rows: 40px auto auto auto;
+  padding: 20px;
+  max-width: var(--card-width);
+
+}
+
+#today-weather h1{
+  grid-column: 1/3;
+  grid-row: 1/2;
+
+}
+h1{
+  margin: 0;
+  font-size: 1.5em;
+}
+.weather-icon{
+  grid-column: 1/2;
+  grid-row: 2/3;
+
+}
+.weather-info{
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+#error-info{
+  grid-column: 1/3;
+  grid-row: 3/4;
+  padding: 20px;
+}
+#weather-description{
+  text-align: center;
+}
+.card .weather-icon, .card #weather-icons{
+  background-color: #ffffff96;
+  margin: 10px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+.card #weather-icons{
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(5, auto);
+  padding-top: 10px;
+
+}
+.card #weather-icons img{
+  border-left: 1px solid var(--main-purple);
+}
+.card #weather-icons img:first-child{
+  border-left: none;
+}
+
+.card .weather-info{
+  margin: 10px;
+}
+.card .weather-info div{
+  margin-bottom: 10px;
 }
 
 #weather-forecast{
-  width: 500px;
+  width: var(--card-width);
+  padding: 20px;
+}
+
+footer{
+  margin-top: 20px;
+  justify-self: stretch;
+  height: 60px;
+  @include blurEffectContainer;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  font-size: 12px;
+  animation: startAnimation;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+footer::before{
+  @include blurEffectContainerBefore;
+  background-color:var(--main-purple);
+
+}
+
+a{
+  color: var(--dark-purple);
+  text-decoration: none;
 }

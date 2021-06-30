@@ -13,6 +13,9 @@ const cleanCurrentWeatherInfo = ()=>{
     document.getElementById('temp-min').innerHTML = '';
     document.getElementById('humidity').innerHTML = '';
     document.getElementById('weather-icon').setAttribute('src', '');
+    document.getElementById('today-weather-title').innerHTML = '';
+    document.getElementById('weather-forecast-title').innerHTML = '';
+    document.getElementById('error-info').classList.remove('card');
 }
 
 const createCanvasElement = () =>{
@@ -26,7 +29,7 @@ const createCanvasElement = () =>{
     const apiKey = '541c440577df233591f68f4da09a2991';
 
     async function choseCity(){
-        let data = await (fetch('http://localhost:63342/weather-app/json/country.json'));
+        let data = await (fetch('/json/country.json'));
         let countryList = await (data.json());
 
         countriesElement.addEventListener('click', ()=>{
@@ -64,13 +67,19 @@ const createCanvasElement = () =>{
         createCanvasElement();
         document.getElementById('error-info').innerHTML = '';
 
+
+
         if (citiesElement.value == 'null'){
             document.getElementById('cities-info').innerHTML = "Please, chose the city";
         } else {
             document.getElementById('myChart').remove();
+            document.getElementById('today-weather').classList.add('card');
+            document.getElementById('weather-forecast').classList.add('card');
             cleanCurrentWeatherInfo();
             document.getElementById('cities-info').innerHTML = '';
-            chosenCity = citiesElement.value;
+            document.getElementById('today-weather-title').innerHTML = 'Now';
+            document.getElementById('weather-forecast-title').innerHTML = 'Weather forecast for next days';
+                chosenCity = citiesElement.value;
             getCurrentWeather(chosenCity);
             getWeatherForecast(chosenCity);
         }
@@ -98,6 +107,8 @@ const createCanvasElement = () =>{
 
         } catch (error) {
             cleanCurrentWeatherInfo();
+            document.getElementById('today-weather').classList.remove('card');
+            document.getElementById('weather-forecast').classList.remove('card');
             document.getElementById('error-info').innerHTML = 'Current Sorry, no data for this city';
 
         }
@@ -131,7 +142,10 @@ const createCanvasElement = () =>{
             myWeatherChart(maxTemp, daysLabels, maxTemp[0]> 0 ? true : false);
         } catch (error) {
             cleanCurrentWeatherInfo();
+            document.getElementById('today-weather').classList.remove('card');
+            document.getElementById('weather-forecast').classList.remove('card');
             document.getElementById('error-info').innerHTML = 'Sorry, no data for this city';
+            document.getElementById('error-info').classList.add('card');
 
         }
     };

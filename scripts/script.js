@@ -88,11 +88,11 @@ const createCanvasElement = () =>{
 
     async function getCurrentWeather(city) {
         try {
-            const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
             const weather = await response.data.main;
 
             const weatherDescription = await response.data.weather[0];
-            const weatherIconSrc = await `http://openweathermap.org/img/wn/${weatherDescription.icon}@2x.png`;
+            const weatherIconSrc = await `https://openweathermap.org/img/wn/${weatherDescription.icon}@2x.png`;
 
             document.getElementById('weather-icon').setAttribute('src',  weatherIconSrc);
             document.getElementById('weather-description').innerHTML =weatherDescription.description;
@@ -116,7 +116,7 @@ const createCanvasElement = () =>{
 
     async function getWeatherForecast(city) {
         try {
-            const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`);
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`);
 
             let weatherForecastData = await response.data.list;
             let daysLabels =[];
@@ -128,7 +128,7 @@ const createCanvasElement = () =>{
                 if (item.dt_txt.includes("15:00:00")){
                     let day = item.dt_txt.substring(item.dt_txt.indexOf('-')+1 ,item.dt_txt.indexOf(' ')).split('-');
                     let date = day[1] + '/' + day[0];
-                    weatherIcon.push(`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`);
+                    weatherIcon.push(`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`);
                     daysLabels.push(date);
                     maxTemp.push((item.main.temp_max).toFixed(1));
                 };

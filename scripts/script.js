@@ -29,7 +29,7 @@ const createCanvasElement = () =>{
     const apiKey = '541c440577df233591f68f4da09a2991';
 
     async function choseCity(){
-        let data = await (fetch('/weather-app/json/country.json'));
+        let data = await (fetch('json/country.json'));
         let countryList = await (data.json());
 
         countriesElement.addEventListener('click', ()=>{

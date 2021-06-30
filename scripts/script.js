@@ -29,7 +29,7 @@ const createCanvasElement = () =>{
     const apiKey = '541c440577df233591f68f4da09a2991';
 
     async function choseCity(){
-        let data = await (fetch('/json/country.json'));
+        let data = await (fetch('/weather-app/json/country.json'));
         let countryList = await (data.json());
 
         countriesElement.addEventListener('click', ()=>{
@@ -109,7 +109,7 @@ const createCanvasElement = () =>{
             cleanCurrentWeatherInfo();
             document.getElementById('today-weather').classList.remove('card');
             document.getElementById('weather-forecast').classList.remove('card');
-            document.getElementById('error-info').innerHTML = 'Current Sorry, no data for this city';
+            document.getElementById('error-info').innerHTML = 'Sorry, no data for this city';
 
         }
     };

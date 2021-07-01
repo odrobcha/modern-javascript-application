@@ -11,3 +11,5 @@
 ### Web design - realized in the frame of Glassmorphism (Frozen Glass design)
 ### App is user-friendly.
 ### It is responsive: looks nice at all screens
+
+![alt text](https://github.com/odrobcha/weather-app/blob/main/img/weather-app-ppreview.png)

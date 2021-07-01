@@ -2,7 +2,6 @@
     const countriesElement =  document.getElementById('countries');
     const citiesElement = document.getElementById('cities');
     const showWeatherElement = document.getElementById('showWeather');
-    let chosenCountry = '';
     let chosenCity = '';
     const apiKey = '541c440577df233591f68f4da09a2991';
 
@@ -26,6 +25,7 @@
         setInnerHTML('humidity', '');
         setInnerHTML('today-weather-title', '');
         setInnerHTML('weather-forecast-title', '');
+        setInnerHTML('wind', '');
         removeCardClass('error-info');
         document.getElementById('weather-icon').setAttribute('src', '');
     }
@@ -35,8 +35,6 @@
             removeCardClass('error-info');
         });
     };
-
-
     const createCanvasElement = () =>{
         let canvasElement = document.createElement('canvas');
         canvasElement.setAttribute('id', 'weatherChart');
@@ -56,19 +54,20 @@
             countriesElement.appendChild(countryElement);
         };
 
-        countriesElement.addEventListener('click', ()=>{
-            chosenCountry = countriesElement.value;
-            let chosenCitiesList = countryList[chosenCountry];
-            document.getElementById('country-first-option').setAttribute('disabled', 'disabled');
-            citiesElement.innerHTML = '';
+            countriesElement.addEventListener('click', ()=>{
+                let chosenCountry = countriesElement.value;
+                let chosenCitiesList =  countryList[chosenCountry];
 
-            for (let city of chosenCitiesList){
-                let cityElement = document.createElement('option');
-                cityElement.setAttribute('value', city);
-                cityElement.innerHTML = city;
-                citiesElement.appendChild(cityElement);
-            };
-        });
+                document.getElementById('country-first-option').setAttribute('disabled', 'disabled');
+                citiesElement.innerHTML = '';
+
+                for (let city of chosenCitiesList){
+                    let cityElement = document.createElement('option');
+                    cityElement.setAttribute('value', city);
+                    cityElement.innerHTML = city;
+                    citiesElement.appendChild(cityElement);
+                };
+            });
 
         showWeatherElement.addEventListener('click', ()=>{
             createCanvasElement();
@@ -82,6 +81,7 @@
             } else {
                 cleanCurrentWeatherInfo();
                 document.getElementById('weatherChart').remove();
+
                 addCardClass('weather-forecast');
                 addCardClass('today-weather');
                 setInnerHTML('cities-info', '');
@@ -99,9 +99,11 @@
         try {
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
             const weather = await response.data.main;
+            console.log(response.data.wind.speed);
 
             const weatherDescription = await response.data.weather[0];
             const weatherIconSrc = await `https://openweathermap.org/img/wn/${weatherDescription.icon}@2x.png`;
+            const windSpeed = await response.data.wind.speed;
 
             document.getElementById('weather-icon').setAttribute('src',  weatherIconSrc);
 
@@ -111,6 +113,7 @@
             setInnerHTML('temp-max', `Max: ${(weather.temp_max).toFixed(1)}&#8451`);
             setInnerHTML('temp-min', `Min: ${(weather.temp_min).toFixed(1)}&#8451`);
             setInnerHTML('humidity', `Humidity: ${(weather.humidity).toFixed(1)}%`);
+            setInnerHTML('wind', `Wind: ${(windSpeed).toFixed(1)}km/h`);
 
 
         } catch (error) {

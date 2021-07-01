@@ -58,6 +58,10 @@
                 let chosenCountry = countriesElement.value;
                 let chosenCitiesList =  countryList[chosenCountry];
 
+                if (chosenCitiesList === undefined){
+                    return
+                }
+
                 document.getElementById('country-first-option').setAttribute('disabled', 'disabled');
                 citiesElement.innerHTML = '';
 
@@ -99,7 +103,6 @@
         try {
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
             const weather = await response.data.main;
-            console.log(response.data.wind.speed);
 
             const weatherDescription = await response.data.weather[0];
             const weatherIconSrc = await `https://openweathermap.org/img/wn/${weatherDescription.icon}@2x.png`;

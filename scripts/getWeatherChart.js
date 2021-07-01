@@ -1,5 +1,5 @@
-const myWeatherChart = (temp, days, beginYAt)=>{
-    var ctx = document.getElementById('myChart').getContext('2d');
+const builtWeatherChart = (temp, days, beginYAt)=>{
+    var ctx = document.getElementById('weatherChart').getContext('2d');
 
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -22,12 +22,13 @@ const myWeatherChart = (temp, days, beginYAt)=>{
             plugins: {
                 legend: {
                     display: true,
+
                 }
             },
             scales: {
-
                 y: {
-                    beginAtZero: beginYAt
+                    beginAtZero: beginYAt,
+
                 }
             }
         }

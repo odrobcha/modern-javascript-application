@@ -1,4 +1,9 @@
+@font-face {
+  font-family: app-font;
+  src: url('../fonts/Barlow_Condensed/BarlowCondensed-Regular.ttf'),
+        url('../fonts/Barlow_Condensed/BarlowCondensed-SemiBold.ttf');
 
+}
 
 body {
   background: url(../img/purple3.jpg) no-repeat;
@@ -12,6 +17,8 @@ body {
   background-position:center center;
   color: var(--font-color);
   text-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.2);
+  font-family: 'app-font', sans-serif;
+  font-size: 20px;
 
 }
 @mixin blurEffectContainer{
@@ -80,8 +87,14 @@ select, button{
   color: var(--font-color);
   }
 select{
-  padding: 0 5px;
+  padding: 0 10px;
+
 }
+
+select option{
+  color: red;
+}
+
 
 select, button, .card{
   background: rgba(255, 255, 255, 0.6);
@@ -105,6 +118,9 @@ select::before, button::before, card::before{
 button{
   background: var(--main-purple);
   cursor: pointer;
+}
+#countries-info.card, #cities-info.card  {
+  padding: 20px;
 }
 
 .weather-container {
@@ -169,7 +185,7 @@ h1{
   text-align: center;
 }
 .card .weather-icon, .card #weather-icons{
-  background-color: #ffffff96;
+  background-color: #ffffff63;
   margin: 10px;
   display: grid;
   align-items: center;
@@ -201,6 +217,7 @@ h1{
 
 .card .weather-info{
   margin: 10px;
+  font-size: 24px;
 }
 .card .weather-info div{
   margin-bottom: 10px;
@@ -224,7 +241,7 @@ footer{
   display: grid;
   justify-items: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 16px;
   animation: startAnimation;
   animation-duration: 0.8s;
   animation-timing-function: ease-in-out;

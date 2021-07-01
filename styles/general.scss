@@ -60,6 +60,9 @@ body {
 
 .container:before {
   @include blurEffectContainerBefore;
+  animation: startAnimation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 }
 .container-inner{
   box-sizing: border-box;

@@ -1,32 +1,31 @@
-
-const countriesElement =  document.getElementById('countries');
-const citiesElement = document.getElementById('cities');
-const showWeatherElement = document.getElementById('showWeather');
-
-const cleanCurrentWeatherInfo = ()=>{
-    document.getElementById('weather-icons').innerHTML= '';
-    document.getElementById('weather-icon').innerHTML = '';
-    document.getElementById('weather-description').innerHTML = '';
-    document.getElementById('temp').innerHTML = '';
-    document.getElementById('temp-feels-like').innerHTML = '';
-    document.getElementById('temp-max').innerHTML = '';
-    document.getElementById('temp-min').innerHTML = '';
-    document.getElementById('humidity').innerHTML = '';
-    document.getElementById('weather-icon').setAttribute('src', '');
-    document.getElementById('today-weather-title').innerHTML = '';
-    document.getElementById('weather-forecast-title').innerHTML = '';
-    document.getElementById('error-info').classList.remove('card');
-}
-
-const createCanvasElement = () =>{
-    let canvasElement = document.createElement('canvas');
-    canvasElement.setAttribute('id', 'myChart');
-    document.getElementById('weather-forecast').appendChild(canvasElement);
-}
-
 (() => {
+    const countriesElement =  document.getElementById('countries');
+    const citiesElement = document.getElementById('cities');
+    const showWeatherElement = document.getElementById('showWeather');
+    let chosenCountry = '';
     let chosenCity = '';
     const apiKey = '541c440577df233591f68f4da09a2991';
+
+    const cleanCurrentWeatherInfo = ()=>{
+        document.getElementById('weather-icons').innerHTML= '';
+        document.getElementById('weather-icon').innerHTML = '';
+        document.getElementById('weather-description').innerHTML = '';
+        document.getElementById('temp').innerHTML = '';
+        document.getElementById('temp-feels-like').innerHTML = '';
+        document.getElementById('temp-max').innerHTML = '';
+        document.getElementById('temp-min').innerHTML = '';
+        document.getElementById('humidity').innerHTML = '';
+        document.getElementById('weather-icon').setAttribute('src', '');
+        document.getElementById('today-weather-title').innerHTML = '';
+        document.getElementById('weather-forecast-title').innerHTML = '';
+        document.getElementById('error-info').classList.remove('card');
+    }
+
+    const createCanvasElement = () =>{
+        let canvasElement = document.createElement('canvas');
+        canvasElement.setAttribute('id', 'myChart');
+        document.getElementById('weather-forecast').appendChild(canvasElement);
+    };
 
     async function choseCity(){
         let data = await (fetch('json/country.json'));
@@ -41,10 +40,7 @@ const createCanvasElement = () =>{
             countryElement.setAttribute('value', country);
             countryElement.innerHTML = country;
             countriesElement.appendChild(countryElement);
-
         };
-
-        let chosenCountry = '';
 
         countriesElement.addEventListener('click', ()=>{
             chosenCountry = countriesElement.value;
@@ -63,27 +59,29 @@ const createCanvasElement = () =>{
                 }
             }
         });
-    showWeatherElement.addEventListener('click', ()=>{
-        createCanvasElement();
-        document.getElementById('error-info').innerHTML = '';
 
+        showWeatherElement.addEventListener('click', ()=>{
+            createCanvasElement();
+            document.getElementById('error-info').innerHTML = '';
 
+            if (citiesElement.value == 'null'){
+                document.getElementById('cities-info').innerHTML = "Please, chose the city";
+            } else {
+                cleanCurrentWeatherInfo();
+                document.getElementById('myChart').remove();
+                document.getElementById('today-weather').classList.add('card');
+                document.getElementById('weather-forecast').classList.add('card');
+                document.getElementById('cities-info').innerHTML = '';
+                console.log( document.getElementById('today-weather-title').innerHTML);
+                document.getElementById('today-weather-title').innerHTML = 'Now';
+                console.log( document.getElementById('today-weather-title').innerHTML);
+                document.getElementById('weather-forecast-title').innerHTML = 'Weather forecast';
 
-        if (citiesElement.value == 'null'){
-            document.getElementById('cities-info').innerHTML = "Please, chose the city";
-        } else {
-            document.getElementById('myChart').remove();
-            document.getElementById('today-weather').classList.add('card');
-            document.getElementById('weather-forecast').classList.add('card');
-            cleanCurrentWeatherInfo();
-            document.getElementById('cities-info').innerHTML = '';
-            document.getElementById('today-weather-title').innerHTML = 'Now';
-            document.getElementById('weather-forecast-title').innerHTML = 'Weather forecast for next days';
                 chosenCity = citiesElement.value;
-            getCurrentWeather(chosenCity);
-            getWeatherForecast(chosenCity);
-        }
-    });
+                getCurrentWeather(chosenCity);
+                getWeatherForecast(chosenCity);
+            };
+     });
     };
 
     async function getCurrentWeather(city) {
@@ -97,13 +95,11 @@ const createCanvasElement = () =>{
             document.getElementById('weather-icon').setAttribute('src',  weatherIconSrc);
             document.getElementById('weather-description').innerHTML =weatherDescription.description;
 
-
             document.getElementById('temp').innerHTML = `Now: ${(weather.temp).toFixed(1)}&#8451`;
             document.getElementById('temp-feels-like').innerHTML =`Feels like: ${(weather.feels_like).toFixed(1)}&#8451`;
             document.getElementById('temp-max').innerHTML = `Max: ${(weather.temp_max).toFixed(1)}&#8451`;
             document.getElementById('temp-min').innerHTML = `Min: ${(weather.temp_min).toFixed(1)}&#8451`;
             document.getElementById('humidity').innerHTML = `Humidity: ${(weather.humidity).toFixed(1)}%`;
-
 
         } catch (error) {
             cleanCurrentWeatherInfo();
@@ -111,7 +107,7 @@ const createCanvasElement = () =>{
             document.getElementById('weather-forecast').classList.remove('card');
             document.getElementById('error-info').innerHTML = 'Sorry, no data for this city';
 
-        }
+        };
     };
 
     async function getWeatherForecast(city) {
@@ -119,9 +115,11 @@ const createCanvasElement = () =>{
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`);
 
             let weatherForecastData = await response.data.list;
+            console.log(weatherForecastData);
             let daysLabels =[];
             let maxTemp = [];
             let weatherIcon = [];
+            let weatherDescription = [];
 
 
             weatherForecastData.find((item)=>{
@@ -131,13 +129,25 @@ const createCanvasElement = () =>{
                     weatherIcon.push(`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`);
                     daysLabels.push(date);
                     maxTemp.push((item.main.temp_max).toFixed(1));
+                    weatherDescription.push(item.weather[0].description);
                 };
             });
 
             for (i=0; i<daysLabels.length; i++){
                 let iconImg = document.createElement('img');
                 iconImg.setAttribute('src', weatherIcon[i]);
-                document.getElementById('weather-icons').appendChild(iconImg);
+
+                let iconDescription = document.createElement("p");
+                iconDescription.innerHTML = weatherDescription[i];
+
+                let iconContainer = document.createElement('div');
+                iconContainer.setAttribute('class', 'icon-container');
+
+                iconContainer.appendChild(iconImg);
+                iconContainer.appendChild(iconDescription);
+
+                document.getElementById('weather-icons').appendChild(iconContainer);
+
             };
             myWeatherChart(maxTemp, daysLabels, maxTemp[0]> 0 ? true : false);
         } catch (error) {

@@ -6,7 +6,7 @@ const myWeatherChart = (temp, days, beginYAt)=>{
         data: {
             labels: days,
             datasets: [{
-                label: 'Weather Forecast',
+                label: `Temperature, C`,
                 data: temp,
                 backgroundColor: [
                     'rgba(87, 21, 93, 1)',
@@ -21,7 +21,7 @@ const myWeatherChart = (temp, days, beginYAt)=>{
         options: {
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
                 }
             },
             scales: {

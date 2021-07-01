@@ -1,0 +1,43 @@
+@media only screen and (max-width: 850px) {
+  .weather-buttons {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto  ;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .container {
+    width: 95vw;
+  }
+  .card .icon-container p{
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container-inner{
+    padding: 20px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  #today-weather, #weather-forecast {
+    padding: 10px;
+  }
+  .card #weather-icons{
+    margin: 0;
+  }
+  #today-weather {
+    grid-template-columns: 120px auto;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .icon-container img{
+    display: none;
+  }
+  .card .icon-container p {
+    font-size: 12px;
+  }
+  #today-weather .weather-info{
+    font-size: 14px;
+  }
+}

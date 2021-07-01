@@ -3,7 +3,7 @@
   --main-purple: rgba(53, 14, 71, 0.4);
   --dark-purple: rgba(87, 21, 93, 1);
   --card-width: 100%;
-  --font-color: #3b3535;
+  --font-color: #0f0e0e;
 }
 
 body {
@@ -37,7 +37,7 @@ body {
   margin-top: 70px;
   margin-bottom: 70px;
   animation: startAnimation;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   box-sizing: border-box;
 }
@@ -73,16 +73,11 @@ body {
 select, button {
   height: 2.5rem;
   animation: startAnimation;
-  animation-duration: 0.8s;
+  animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   opacity: 0;
-  animation-delay: 0.9s;
-  color: var(--font-color);
-}
-
-select {
-  padding: 0 5px;
+  animation-delay: 1s;
 }
 
 select, button, .card {
@@ -160,16 +155,12 @@ button {
 
 h1 {
   margin: 0;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .weather-icon {
   grid-column: 1/2;
   grid-row: 2/3;
-}
-
-#weather-icon {
-  width: 100%;
 }
 
 .weather-info {
@@ -195,31 +186,20 @@ h1 {
   justify-items: center;
   padding-bottom: 10px;
   border-radius: 10px;
-  margin-bottom: 20px;
 }
 
 .card #weather-icons {
   grid-template-rows: 100%;
-  grid-template-columns: repeat(5, 20%);
+  grid-template-columns: repeat(5, auto);
   padding-top: 10px;
 }
 
-.card .icon-container {
+.card #weather-icons img {
   border-left: 1px solid var(--main-purple);
 }
 
-.card .icon-container:first-child {
+.card #weather-icons img:first-child {
   border-left: none;
-}
-
-.card .icon-container p {
-  margin: 0;
-  text-align: center;
-  text-transform: capitalize;
-}
-
-.card .icon-container img {
-  width: 100%;
 }
 
 .card .weather-info {
@@ -230,17 +210,8 @@ h1 {
   margin-bottom: 10px;
 }
 
-#weather-forecast-title {
-  margin: 10px 0px 20px 0;
-}
-
 #weather-forecast {
   padding: 20px;
-}
-
-#weather-description {
-  padding: 0 5px;
-  text-transform: capitalize;
 }
 
 footer {
@@ -256,7 +227,7 @@ footer {
   align-items: center;
   font-size: 12px;
   animation: startAnimation;
-  animation-duration: 0.8s;
+  animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   opacity: 0;
@@ -290,45 +261,5 @@ a {
     grid-template-rows: auto auto auto;
   }
 }
-@media only screen and (max-width: 750px) {
-  .container {
-    width: 95vw;
-  }
 
-  .card .icon-container p {
-    font-size: 14px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .container-inner {
-    padding: 20px;
-  }
-}
-@media only screen and (max-width: 450px) {
-  #today-weather, #weather-forecast {
-    padding: 10px;
-  }
-
-  .card #weather-icons {
-    margin: 0;
-  }
-
-  #today-weather {
-    grid-template-columns: 120px auto;
-  }
-}
-@media only screen and (max-width: 350px) {
-  .icon-container img {
-    display: none;
-  }
-
-  .card .icon-container p {
-    font-size: 12px;
-  }
-
-  #today-weather .weather-info {
-    font-size: 14px;
-  }
-}
-
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=styles.scc.map */

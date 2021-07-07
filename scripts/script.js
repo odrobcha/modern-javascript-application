@@ -1,50 +1,27 @@
 import {test} from "./test.js";
+import{test2} from './test2.js';
 import {addCardClass} from "./modules/addCardClass.js";
 import {removeCardClass} from "./modules/removeCardClass.js";
 import {apiKey} from './modules/var.js'
-import {setInnerHTML} from './modules/setInnerHTML.js'
+import {setInnerHTML} from './modules/setInnerHTML.js';
+import {createSelectList} from './modules/createSelectList.js';
+import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
 
 (() => {
+    test2();
     const countriesElement =  document.getElementById('countries');
     const citiesElement = document.getElementById('cities');
     const showWeatherElement = document.getElementById('showWeather');
     let chosenCity = '';
 
 
-    const cleanCurrentWeatherInfo = ()=>{
-        setInnerHTML('weather-icons', '');
-        setInnerHTML('weather-icon', '');
-        setInnerHTML('weather-description', '');
-        setInnerHTML('temp', '');
-        setInnerHTML('temp-feels-like', '');
-        setInnerHTML('temp-max', '');
-        setInnerHTML('temp-min', '');
-        setInnerHTML('humidity', '');
-        setInnerHTML('today-weather-title', '');
-        setInnerHTML('weather-forecast-title', '');
-        setInnerHTML('wind', '');
-        removeCardClass('error-info');
-        document.getElementById('weather-icon').setAttribute('src', '');
-    }
-
-    const createCanvasElement = () =>{
+     const createCanvasElement = () =>{
         let canvasElement = document.createElement('canvas');
         canvasElement.setAttribute('id', 'weatherChart');
         document.getElementById('weather-forecast').appendChild(canvasElement);
     };
 
-    const createSelectList = (selectItems, parentElement) =>{
-        let loopingArray = selectItems;
-        if (!Array.isArray(selectItems)) {
-            loopingArray = Object.keys(selectItems);
-        };
-        for (let item of loopingArray){
-            let optionElement = document.createElement('option');
-            optionElement.setAttribute('value', item);
-            optionElement.innerHTML = item;
-            parentElement.appendChild(optionElement);
-        };
-    };
+
 
     async function choseCity(){
         let data = await (fetch('json/country.json'));

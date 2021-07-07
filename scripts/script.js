@@ -1,19 +1,16 @@
+import {test} from "./test.js";
+import {addCardClass} from "./modules/addCardClass.js";
+import {removeCardClass} from "./modules/removeCardClass.js";
+import {apiKey} from './modules/var.js'
+import {setInnerHTML} from './modules/setInnerHTML.js'
+
 (() => {
     const countriesElement =  document.getElementById('countries');
     const citiesElement = document.getElementById('cities');
     const showWeatherElement = document.getElementById('showWeather');
     let chosenCity = '';
-    const apiKey = '541c440577df233591f68f4da09a2991';
 
-    const addCardClass = (id) =>{
-        document.getElementById(id).classList.add('card');
-    };
-    const removeCardClass = (id)=>{
-        document.getElementById(id).classList.remove('card');
-    };
-    const setInnerHTML = (id, text) =>{
-        document.getElementById(id).innerHTML = text;
-    };
+
     const cleanCurrentWeatherInfo = ()=>{
         setInnerHTML('weather-icons', '');
         setInnerHTML('weather-icon', '');
@@ -147,7 +144,7 @@
                 };
             });
 
-            for (i=0; i<daysLabels.length; i++){
+            for (let i=0; i<daysLabels.length; i++){
                 let iconImg = document.createElement('img');
                 iconImg.setAttribute('src', weatherIcon[i]);
 
@@ -174,4 +171,6 @@
         }
     };
     choseCity();
+
+    test();
 })();

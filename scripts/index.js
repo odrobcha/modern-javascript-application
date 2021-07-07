@@ -1,75 +1,44 @@
-import {test} from "./test.js";
-import{test2} from './test2.js';
+
 import {addCardClass} from "./modules/addCardClass.js";
 import {removeCardClass} from "./modules/removeCardClass.js";
 import {apiKey} from './modules/var.js'
 import {setInnerHTML} from './modules/setInnerHTML.js';
 import {createSelectList} from './modules/createSelectList.js';
 import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
-import {createCanvasElement} from './modules/createCanvasElement.js'
+import {createCanvasElement} from './modules/createCanvasElement.js';
+import {createCitiesList} from "./modules/createCitiesList.js";
+
 
 (() => {
-    test2();
     const countriesElement =  document.getElementById('countries');
     const citiesElement = document.getElementById('cities');
     const showWeatherElement = document.getElementById('showWeather');
     let chosenCity = '';
 
+    const displayWeather = () =>{
+        createCanvasElement();
+        setInnerHTML('error-info', '');
+        removeCardClass('error-info');
+        removeCardClass('cities-info');
 
- /*    const createCanvasElement = () =>{
-        let canvasElement = document.createElement('canvas');
-        canvasElement.setAttribute('id', 'weatherChart');
-        document.getElementById('weather-forecast').appendChild(canvasElement);
-    };
+        if (citiesElement.value === 'null'){
+            setInnerHTML('cities-info', 'Please, chose the city');
+            addCardClass('cities-info');
+            return;
+        } ;
 
-*/
+        cleanCurrentWeatherInfo();
+        document.getElementById('weatherChart').remove();
+        chosenCity = citiesElement.value;
+        getCurrentWeather(chosenCity);
+        getWeatherForecast(chosenCity);
 
-    async function displayWeather(){
-        let data = await (fetch('json/country.json'));
-        let countryList = await (data.json());
-
-        createSelectList (countryList, countriesElement);
-
-        countriesElement.addEventListener('click', ()=>{
-
-            let chosenCountry = countriesElement.value;
-            let chosenCitiesList = countryList[chosenCountry];
-            if (chosenCitiesList === undefined){
-                return
-            }
-            document.getElementById('country-first-option').setAttribute('disabled', 'disabled');
-            citiesElement.innerHTML = '';
-
-            createSelectList (chosenCitiesList, citiesElement);
-
-        });
-
-        showWeatherElement.addEventListener('click', ()=>{
-            createCanvasElement();
-            setInnerHTML('error-info', '');
-            removeCardClass('error-info');
-            removeCardClass('cities-info');
-
-            if (citiesElement.value === 'null'){
-                setInnerHTML('cities-info', 'Please, chose the city');
-                addCardClass('cities-info');
-            } else {
-                cleanCurrentWeatherInfo();
-                document.getElementById('weatherChart').remove();
-
-                chosenCity = citiesElement.value;
-
-                getCurrentWeather(chosenCity);
-                getWeatherForecast(chosenCity);
-
-                addCardClass('weather-forecast');
-                addCardClass('today-weather');
-                setInnerHTML('cities-info', '');
-                setInnerHTML('today-weather-title', 'Now');
-                setInnerHTML('weather-forecast-title', 'Weather forecast');
-            };
-     });
-    };
+        addCardClass('weather-forecast');
+        addCardClass('today-weather');
+        setInnerHTML('cities-info', '');
+        setInnerHTML('today-weather-title', 'Now');
+        setInnerHTML('weather-forecast-title', 'Weather forecast');
+    }
 
     async function getCurrentWeather(city) {
         try {
@@ -147,7 +116,22 @@ import {createCanvasElement} from './modules/createCanvasElement.js'
 
         }
     };
-    displayWeather();
+    async function choseCityEndDisplayWeather(){
+        let data = await (fetch('json/country.json'));
+        let countryList = await (data.json());
 
-    test();
+        createSelectList (countryList, countriesElement);
+
+        countriesElement.addEventListener('click', ()=>{
+            createCitiesList(countryList, citiesElement);
+        });
+
+        showWeatherElement.addEventListener('click', ()=>{
+            displayWeather();
+        });
+    }
+
+
+    choseCityEndDisplayWeather();
+
 })();

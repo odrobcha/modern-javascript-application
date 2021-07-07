@@ -1,2 +1,2 @@
-import main from './script';
+import main from './index';
 

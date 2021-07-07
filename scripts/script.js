@@ -6,6 +6,7 @@ import {apiKey} from './modules/var.js'
 import {setInnerHTML} from './modules/setInnerHTML.js';
 import {createSelectList} from './modules/createSelectList.js';
 import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
+import {createCanvasElement} from './modules/createCanvasElement.js'
 
 (() => {
     test2();
@@ -15,20 +16,19 @@ import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
     let chosenCity = '';
 
 
-     const createCanvasElement = () =>{
+ /*    const createCanvasElement = () =>{
         let canvasElement = document.createElement('canvas');
         canvasElement.setAttribute('id', 'weatherChart');
         document.getElementById('weather-forecast').appendChild(canvasElement);
     };
 
+*/
 
-
-    async function choseCity(){
+    async function displayWeather(){
         let data = await (fetch('json/country.json'));
         let countryList = await (data.json());
 
         createSelectList (countryList, countriesElement);
-
 
         countriesElement.addEventListener('click', ()=>{
 
@@ -147,7 +147,7 @@ import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
 
         }
     };
-    choseCity();
+    displayWeather();
 
     test();
 })();

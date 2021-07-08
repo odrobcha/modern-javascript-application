@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <title>Weather forecast </title>
-    <link rel="stylesheet" href="styles/normalize.css">
-   <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="../src/styles/normalize.css">
+   <link rel="stylesheet" href="../src/styles/styles.css">
 
 
 </head>
@@ -82,20 +83,9 @@
 
 </body>
 
-<script src="scripts/chart.min.js"></script>
-<script src="scripts/getWeatherChart.js"></script>
-<script src="scripts/axios.min.js"></script>
+<script src="../src/scripts/chart.min.js"></script>
+<script src="../src/scripts/modules/builtWeatherChart.js"></script>
+<!--<script src="../src/scripts/axios.min.js"></script>-->
 
-<script type="module" src="scripts/modules/var.js"></script>
-<script type="module" src="scripts/modules/addCardClass.js"></script>
-<script type="module" src="scripts/modules/removeCardClass.js"></script>
-<script type="module" src="scripts/modules/setInnerHTML.js"></script>
-<script type="module" src="scripts/modules/createCanvasElement.js"></script>
-<script type="module" src="scripts/modules/createSelectList.js"></script>
-<script type="module" src="scripts/modules/cleanCurrentWeatherInfo.js"></script>
-<script type="module" src="scripts/modules/createCitiesList.js"></script>
-
-
-
-<script type="module" src="scripts/index.js"></script>
+<script src="main.js"></script>
 </html>

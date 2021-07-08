@@ -1,3 +1,5 @@
+
+
 const builtWeatherChart = (temp, days, beginYAt)=>{
     var ctx = document.getElementById('weatherChart').getContext('2d');
 

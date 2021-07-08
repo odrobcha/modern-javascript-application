@@ -1,12 +1,14 @@
+import _ from 'lodash';
+const axios = require('axios');
 
-import {addCardClass} from "./modules/addCardClass.js";
-import {removeCardClass} from "./modules/removeCardClass.js";
-import {apiKey} from './modules/var.js'
-import {setInnerHTML} from './modules/setInnerHTML.js';
-import {createSelectList} from './modules/createSelectList.js';
-import {cleanCurrentWeatherInfo} from "./modules/cleanCurrentWeatherInfo.js";
-import {createCanvasElement} from './modules/createCanvasElement.js';
-import {createCitiesList} from "./modules/createCitiesList.js";
+import {addCardClass} from "./scripts/modules/addCardClass.js";
+import {removeCardClass} from "./scripts/modules/removeCardClass.js";
+import {apiKey} from './scripts/modules/var.js'
+import {setInnerHTML} from './scripts/modules/setInnerHTML.js';
+import {createSelectList} from './scripts/modules/createSelectList.js';
+import {cleanCurrentWeatherInfo} from "./scripts/modules/cleanCurrentWeatherInfo.js";
+import {createCanvasElement} from './scripts/modules/createCanvasElement.js';
+import {createCitiesList} from "./scripts/modules/createCitiesList.js";
 
 
 (() => {
@@ -117,7 +119,7 @@ import {createCitiesList} from "./modules/createCitiesList.js";
         }
     };
     async function choseCityEndDisplayWeather(){
-        let data = await (fetch('json/country.json'));
+        let data = await (fetch('../src/json/country.json'));
         let countryList = await (data.json());
 
         createSelectList (countryList, countriesElement);

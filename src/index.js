@@ -9,7 +9,7 @@ import {createSelectList} from './scripts/modules/createSelectList.js';
 import {cleanCurrentWeatherInfo} from "./scripts/modules/cleanCurrentWeatherInfo.js";
 import {createCanvasElement} from './scripts/modules/createCanvasElement.js';
 import {createCitiesList} from "./scripts/modules/createCitiesList.js";
-
+import {builtWeatherChart} from './scripts/modules/builtWeatherChart';
 
 (() => {
     const countriesElement =  document.getElementById('countries');

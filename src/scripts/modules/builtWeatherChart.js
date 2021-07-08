@@ -38,3 +38,4 @@ const builtWeatherChart = (temp, days, beginYAt)=>{
 };
 
 
+export {builtWeatherChart}

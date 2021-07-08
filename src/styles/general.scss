@@ -1,11 +1,11 @@
 @font-face {
   font-family: app-font;
   src: url('../../src/fonts/Barlow_Condensed/BarlowCondensed-Regular.ttf'),
-        url('../../src/fonts/Barlow_Condensed/BarlowCondensed-SemiBold.ttf');
+       url('../../src/fonts/Barlow_Condensed/BarlowCondensed-SemiBold.ttf');
 }
 
 body {
-  background: url(../../src/img/purple3.jpg) no-repeat;
+  background: url('../img/purple3.jpg') no-repeat;
   /* Keep the inherited background full size. */
   background-attachment: fixed;
   background-size: cover;

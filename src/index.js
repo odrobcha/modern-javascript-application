@@ -1,4 +1,7 @@
 import _ from 'lodash';
+
+import "../src/styles/styles.scss";
+
 const axios = require('axios');
 
 import {addCardClass} from "./scripts/modules/addCardClass.js";
